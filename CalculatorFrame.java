@@ -32,8 +32,8 @@ public final class CalculatorFrame extends JFrame
         panel2.add(totalPayout);
         panel2.add(totalProfit);
         panel2.add(ROI);
-        panel2.setBackground(new Color(0, 170, 0));
-        panel1.setBackground(new Color(0, 170, 0));
+        panel2.setBackground(new Color(128, 128, 128));
+        panel1.setBackground(new Color(128, 128, 128));
 
         // Layout of labels and textfields in panel 1
         panel1.setLayout(new GridBagLayout());
@@ -58,7 +58,7 @@ public final class CalculatorFrame extends JFrame
         c.gridy = 2;
         panel1.add(stakeEntry, c);
 
-        myActionListener listener = new myActionListener(this);
+        performCalculation listener = new performCalculation(this);
         calculate.addActionListener(listener);
 
         // Styling of the labels and text fields in panel 1
@@ -81,11 +81,11 @@ public final class CalculatorFrame extends JFrame
         panel2.add(ROI, gbc);
 
         // Styling of the text fields in panel2
-        totalPayout.setBackground(new Color(0, 120, 0));
+        totalPayout.setBackground(new Color(85, 85, 85));
         totalPayout.setForeground(Color.white);
-        totalProfit.setBackground(new Color(0, 120, 0));
+        totalProfit.setBackground(new Color(85, 85, 85));
         totalProfit.setForeground(Color.white);
-        ROI.setBackground(new Color(0, 120, 0));
+        ROI.setBackground(new Color(85, 85, 85));
         ROI.setForeground(Color.white);
 
         // styling of the buttons in panel 2
@@ -106,8 +106,28 @@ public final class CalculatorFrame extends JFrame
         frame.setResizable(false);
     }
 
-    public void changePanel1Colour()
+    public void calcButtonPressed()
     {
         calculate.setText("Calculation complete");
+    }
+
+    public int getInputValues(JTextField f)
+    {
+        return Integer.parseInt(f.getText());
+    }
+
+    public JTextField getBet1Field()
+    {
+        return bet1Entry;
+    }
+
+    public JTextField getBet2Field()
+    {
+        return bet2Entry;
+    }
+
+    public JTextField getStakeField()
+    {
+        return stakeEntry;
     }
 }
