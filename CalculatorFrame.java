@@ -6,7 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
-public final class CalculatorFrame extends JFrame
+public class CalculatorFrame extends JFrame
 {
     private final JFrame frame = new JFrame("ArbitrageCalculator");
     private final JButton calculate = new JButton("Calculate");
@@ -19,11 +19,14 @@ public final class CalculatorFrame extends JFrame
     private final JTextField ROI = new JTextField("ROI: ", 12);
 
     private final JLabel bet1 = new JLabel("Bet 1 ");
-    private final JTextField bet1Entry = new JTextField("Please enter bet 1 odds",15);
+    private final JTextField bet1Entry = new JTextField( 15);
     private final JLabel bet2 = new JLabel("Bet 2 ");
-    private final JTextField bet2Entry = new JTextField("Please enter bet 2 odds", 15);
+    private final JTextField bet2Entry = new JTextField( 15);
     private final JLabel stake = new JLabel("Stake ");
-    private final JTextField stakeEntry = new JTextField("Please enter stake", 15);
+    private final JTextField stakeEntry = new JTextField( 15);
+    private final JLabel enterOdds = new JLabel("Enter Odds and Stake");
+
+    private PerformCalculation listener;
 
     public CalculatorFrame()
     {
@@ -39,32 +42,40 @@ public final class CalculatorFrame extends JFrame
         panel1.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 3, 5, 5);
-        c.gridx = 0;
-        c.gridy = 0;
-        panel1.add(bet1, c);
         c.gridx = 1;
         c.gridy = 0;
-        panel1.add(bet1Entry, c);
+        panel1.add(enterOdds, c);
         c.gridx = 0;
         c.gridy = 1;
-        panel1.add(bet2, c);
+        panel1.add(bet1, c);
         c.gridx = 1;
-        c. gridy = 1;
-        panel1.add(bet2Entry, c);
+        c.gridy = 1;
+        panel1.add(bet1Entry, c);
         c.gridx = 0;
         c.gridy = 2;
+        panel1.add(bet2, c);
+        c.gridx = 1;
+        c. gridy = 2;
+        panel1.add(bet2Entry, c);
+        c.gridx = 0;
+        c.gridy = 3;
         panel1.add(stake, c);
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 3;
         panel1.add(stakeEntry, c);
 
-        performCalculation listener = new performCalculation(this);
+        // Button listeners
+        PerformCalculation listener = new PerformCalculation(this);
         calculate.addActionListener(listener);
+        Reset listener2 = new Reset(this, listener);
+        reset.addActionListener(listener2);
+
 
         // Styling of the labels and text fields in panel 1
         bet1.setForeground(Color.white);
         bet2.setForeground(Color.white);
         stake.setForeground(Color.white);
+        enterOdds.setForeground(Color.white);
 
         // Layout of labels and textfields in panel 2
         panel2.setLayout(new GridBagLayout());
@@ -130,4 +141,16 @@ public final class CalculatorFrame extends JFrame
     {
         return stakeEntry;
     }
+
+    public PerformCalculation getPerformCalculation()
+    {
+        return listener;
+    }
+
+    public void setEnterOdds()
+    {
+        enterOdds.setText("Incorrect Odds Entered!");
+        enterOdds.setForeground(Color.red);
+    }
+
 }
