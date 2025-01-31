@@ -88,7 +88,7 @@ public class CalculatorFrame extends JFrame
         panel1.add(payout, c);
 
         // Button listeners
-        PerformCalculation listener = new PerformCalculation(this);
+        listener = new PerformCalculation(this);
         calculate.addActionListener(listener);
         Reset listener2 = new Reset(this, listener);
         reset.addActionListener(listener2);
@@ -145,9 +145,9 @@ public class CalculatorFrame extends JFrame
         calculate.setText("Calculation complete");
     }
 
-    public int getInputValues(JTextField f)
+    public Float getInputValues(JTextField f)
     {
-        return Integer.parseInt(f.getText());
+        return Float.parseFloat(f.getText());
     }
 
     public JTextField getBet1Field()
@@ -176,4 +176,9 @@ public class CalculatorFrame extends JFrame
         enterOdds.setForeground(Color.red);
     }
 
+    public void setStakes()
+    {
+        bet1Stake.setText(Float.toString(listener.getBet1Stake()));
+        bet2Stake.setText(Float.toString(listener.getBet2Stake()));
+    }
 }
