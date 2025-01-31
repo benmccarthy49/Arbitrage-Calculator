@@ -9,14 +9,16 @@ import java.util.ArrayList;
 public class PerformCalculation implements ActionListener 
 {
     private CalculatorFrame mainFrame;
-    private List<Integer> submittedVals = new ArrayList<Integer>(); 
+    private List<Float> submittedVals = new ArrayList<Float>(); 
+    private Float bet1Stake;
+    private Float bet2Stake;
 
     public PerformCalculation(CalculatorFrame mainframe)
     {
         this.mainFrame = mainframe;
-        submittedVals.add(0);
-        submittedVals.add(0);
-        submittedVals.add(0);
+        submittedVals.add(null);
+        submittedVals.add(null);
+        submittedVals.add(null);
     }
 
     @Override
@@ -27,15 +29,15 @@ public class PerformCalculation implements ActionListener
         {
         mainFrame.calcButtonPressed();
         JTextField x = mainFrame.getBet1Field();
-        int i = mainFrame.getInputValues(x);
+        Float i = mainFrame.getInputValues(x);
         this.submittedVals.set(0, i);
         
         JTextField y = mainFrame.getBet2Field();
-        int j = mainFrame.getInputValues(y);
+        Float j = mainFrame.getInputValues(y);
         this.submittedVals.set(1, j);
 
         JTextField z = mainFrame.getStakeField();
-        int k = mainFrame.getInputValues(z);
+        Float k = mainFrame.getInputValues(z);
         this.submittedVals.set(2, k);
         }
         catch(NumberFormatException a)
@@ -44,20 +46,47 @@ public class PerformCalculation implements ActionListener
             System.out.println("Exception Caught: " + e);
         }
 
+        this.calculateBet1Stake();
+        this.calculateBet2Stake();
+        mainFrame.setStakes();
         System.out.println(submittedVals); //debugging line
     }
 
-    public List<Integer> getSubmittedVals()
+    public List<Float> getSubmittedVals()
     {
         return submittedVals;
     }
 
-    public void setSubmittedVals(Integer i, List<Integer> x)
+    public void setSubmittedVals(Float i, List<Float> x)
     {
         for(int j=0; j<3; j++)
         {
             x.set(j, i);
         }
         System.out.println(x); //debugging line
+    }
+
+    public void calculateBet1Stake()
+    {
+        bet1Stake = (float) (this.submittedVals.get(2) * this.submittedVals.get(1)) / (this.submittedVals.get(0) + this.submittedVals.get(1)); 
+        System.out.println(bet1Stake);
+    }
+
+    public void calculateBet2Stake()
+    {
+        // This gets the value of the entire stake
+        float x = this.submittedVals.get(2);
+
+        bet2Stake = x - this.getBet1Stake(); // The difference between the entire stake and bet1 stake
+    }
+
+    public Float getBet1Stake()
+    {
+        return bet1Stake;
+    }
+
+    public Float getBet2Stake()
+    {
+        return bet2Stake;
     }
 }
