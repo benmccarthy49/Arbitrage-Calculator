@@ -19,7 +19,7 @@ public class Reset implements ActionListener
         mainFrame.getBet1Field().setText("");
         mainFrame.getBet2Field().setText("");
         mainFrame.getStakeField().setText("");
-        List<Integer> x = c.getSubmittedVals();
-        c.setSubmittedVals(0, x);
+        List<Float> x = c.getSubmittedVals();
+        c.setSubmittedVals(null, x);
     }
 }
