@@ -25,6 +25,11 @@ public class CalculatorFrame extends JFrame
     private final JLabel stake = new JLabel("Stake ");
     private final JTextField stakeEntry = new JTextField( 15);
     private final JLabel enterOdds = new JLabel("Enter Odds and Stake");
+    private final JTextField bet1Stake = new JTextField(10);
+    private final JTextField bet2Stake = new JTextField(10);
+    private final JTextField bet1Payout = new JTextField(10);
+    private final JTextField bet2Payout = new JTextField(10);
+    private final JLabel payout = new JLabel("Payout");
 
     private PerformCalculation listener;
 
@@ -51,18 +56,36 @@ public class CalculatorFrame extends JFrame
         c.gridx = 1;
         c.gridy = 1;
         panel1.add(bet1Entry, c);
+        c.gridx = 2;
+        c.gridy = 1;
+        panel1.add(bet1Stake, c);
+        c.gridx = 3;
+        c.gridy = 1;
+        panel1.add(bet1Payout, c);
         c.gridx = 0;
         c.gridy = 2;
         panel1.add(bet2, c);
         c.gridx = 1;
-        c. gridy = 2;
+        c.gridy = 2;
         panel1.add(bet2Entry, c);
+        c.gridx = 2;
+        c.gridy = 2;
+        panel1.add(bet2Stake, c);
+        c.gridx = 3;
+        c.gridy = 2;
+        panel1.add(bet2Payout, c);
         c.gridx = 0;
         c.gridy = 3;
         panel1.add(stake, c);
         c.gridx = 1;
         c.gridy = 3;
         panel1.add(stakeEntry, c);
+        c.gridx = 2;
+        c.gridy = 0;
+        panel1.add(stake, c);
+        c.gridx = 3;
+        c.gridy = 0;
+        panel1.add(payout, c);
 
         // Button listeners
         PerformCalculation listener = new PerformCalculation(this);
