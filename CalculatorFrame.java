@@ -15,7 +15,8 @@ public class CalculatorFrame extends JFrame
     private final JPanel panel2 = new JPanel();
 
     private final JTextField totalPayout = new JTextField("Total Payout: ", 12);
-    private final JTextField totalProfit = new JTextField("Total Profit: ", 12);
+    private final JTextField totalProfit = new JTextField( 12);
+    private final JLabel ProfitLabel = new JLabel("Total Profit");
     private final JTextField ROI = new JTextField("ROI: ", 12);
 
     private final JLabel bet1 = new JLabel("Bet 1 ");
@@ -107,6 +108,9 @@ public class CalculatorFrame extends JFrame
         gbc.gridx = 3;
         gbc.gridy = 0;
         panel2.add(totalPayout, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        panel2.add(ProfitLabel, gbc);
         gbc.gridx = 3;
         gbc.gridy = 1;
         panel2.add(totalProfit, gbc);
@@ -180,5 +184,26 @@ public class CalculatorFrame extends JFrame
     {
         bet1Stake.setText(Float.toString(listener.getBet1Stake()));
         bet2Stake.setText(Float.toString(listener.getBet2Stake()));
+    }
+
+    public JTextField getBet1StakeField()
+    {
+        return bet1Stake;
+    }
+
+    public JTextField getBet2StakeField()
+    {
+        return bet2Stake;
+    }
+
+    public void setPayout()
+    {
+        bet1Payout.setText(Float.toString(listener.getPayout()));
+        bet2Payout.setText(Float.toString(listener.getPayout()));
+    }
+
+    public void setTotalProfit()
+    {
+        totalProfit.setText(Float.toString(listener.getTotalProfit()));
     }
 }
