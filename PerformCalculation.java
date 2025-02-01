@@ -4,7 +4,9 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.math.RoundingMode;  
 
 public class PerformCalculation implements ActionListener 
 {
@@ -12,6 +14,10 @@ public class PerformCalculation implements ActionListener
     private List<Float> submittedVals = new ArrayList<Float>(); 
     private Float bet1Stake;
     private Float bet2Stake;
+    private Float payout;
+    private Float totalProfit;
+
+    private static final DecimalFormat df = new DecimalFormat("0.00"); // for rounding the numbers to 2dp
 
     public PerformCalculation(CalculatorFrame mainframe)
     {
@@ -48,7 +54,11 @@ public class PerformCalculation implements ActionListener
 
         this.calculateBet1Stake();
         this.calculateBet2Stake();
+        this.calculatePayout();
+        this.calculateTotalProfit();
         mainFrame.setStakes();
+        mainFrame.setPayout();
+        mainFrame.setTotalProfit();
         System.out.println(submittedVals); //debugging line
     }
 
@@ -88,5 +98,26 @@ public class PerformCalculation implements ActionListener
     public Float getBet2Stake()
     {
         return bet2Stake;
+    }
+
+    public void calculatePayout()
+    {
+        payout = this.getBet1Stake() * this.submittedVals.get(0);
+        System.out.println("Payout is: " + payout);
+    }
+
+    public Float getPayout()
+    {
+        return Float.parseFloat(df.format(payout));
+    }
+
+    public void calculateTotalProfit()
+    {
+        totalProfit = this.getPayout() - this.submittedVals.get(2);
+    }
+
+    public Float getTotalProfit()
+    {
+        return totalProfit;
     }
 }
