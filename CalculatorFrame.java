@@ -14,10 +14,13 @@ public class CalculatorFrame extends JFrame
     private final JPanel panel1 = new JPanel();
     private final JPanel panel2 = new JPanel();
 
-    private final JTextField totalPayout = new JTextField("Total Payout: ", 12);
+    private final JTextField totalPayout = new JTextField( 12);
     private final JTextField totalProfit = new JTextField( 12);
     private final JLabel ProfitLabel = new JLabel("Total Profit");
-    private final JTextField ROI = new JTextField("ROI: ", 12);
+    private final JTextField ROI = new JTextField(12);
+    private final JLabel ROILabel = new JLabel("ROI");
+    private final JLabel percentLabel = new JLabel("(%)");
+    private final JLabel payoutLabel = new JLabel("Payout");
 
     private final JLabel bet1 = new JLabel("Bet 1 ");
     private final JTextField bet1Entry = new JTextField( 15);
@@ -100,6 +103,7 @@ public class CalculatorFrame extends JFrame
         bet2.setForeground(Color.white);
         stake.setForeground(Color.white);
         enterOdds.setForeground(Color.white);
+        payout.setForeground(Color.white);
 
         // Layout of labels and textfields in panel 2
         panel2.setLayout(new GridBagLayout());
@@ -117,14 +121,27 @@ public class CalculatorFrame extends JFrame
         gbc.gridx = 3;
         gbc.gridy = 2;
         panel2.add(ROI, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        panel2.add(ROILabel, gbc);
+        gbc.gridx = 4;
+        gbc.gridy = 2;
+        panel2.add(percentLabel, gbc);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        panel2.add(payoutLabel, gbc);
 
-        // Styling of the text fields in panel2
+        // Styling of the text fields and labels in panel2
         totalPayout.setBackground(new Color(85, 85, 85));
         totalPayout.setForeground(Color.white);
         totalProfit.setBackground(new Color(85, 85, 85));
         totalProfit.setForeground(Color.white);
         ROI.setBackground(new Color(85, 85, 85));
         ROI.setForeground(Color.white);
+        ProfitLabel.setForeground(Color.white);
+        ROILabel.setForeground(Color.white);
+        percentLabel.setForeground(Color.white);
+        payoutLabel.setForeground(Color.white);
 
         // styling of the buttons in panel 2
         calculate.setBackground(Color.MAGENTA);
@@ -200,10 +217,41 @@ public class CalculatorFrame extends JFrame
     {
         bet1Payout.setText(Float.toString(listener.getPayout()));
         bet2Payout.setText(Float.toString(listener.getPayout()));
+        totalPayout.setText(Float.toString(listener.getPayout()));
     }
 
     public void setTotalProfit()
     {
         totalProfit.setText(Float.toString(listener.getTotalProfit()));
+    }
+
+    public void setROI()
+    {
+        ROI.setText(Float.toString(listener.getROI()));
+    }
+
+    public JTextField getROIField()
+    {
+        return ROI;
+    }
+
+    public JTextField getProfitField()
+    {
+        return totalProfit;
+    }
+
+    public JTextField getPayoutField()
+    {
+        return totalPayout;
+    }
+
+    public JTextField getBet1PayoutField()
+    {
+        return bet1Payout;
+    }
+
+    public JTextField getBet2PayoutField()
+    {
+        return bet2Payout;
     }
 }
