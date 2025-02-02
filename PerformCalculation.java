@@ -16,6 +16,7 @@ public class PerformCalculation implements ActionListener
     private Float bet2Stake;
     private Float payout;
     private Float totalProfit;
+    private Float ROI;
 
     private static final DecimalFormat df = new DecimalFormat("0.00"); // for rounding the numbers to 2dp
 
@@ -56,9 +57,11 @@ public class PerformCalculation implements ActionListener
         this.calculateBet2Stake();
         this.calculatePayout();
         this.calculateTotalProfit();
+        this.calculateROI();
         mainFrame.setStakes();
         mainFrame.setPayout();
         mainFrame.setTotalProfit();
+        mainFrame.setROI();
         System.out.println(submittedVals); //debugging line
     }
 
@@ -92,12 +95,12 @@ public class PerformCalculation implements ActionListener
 
     public Float getBet1Stake()
     {
-        return bet1Stake;
+        return Float.parseFloat(df.format(bet1Stake));
     }
 
     public Float getBet2Stake()
     {
-        return bet2Stake;
+        return Float.parseFloat(df.format(bet2Stake));
     }
 
     public void calculatePayout()
@@ -118,6 +121,17 @@ public class PerformCalculation implements ActionListener
 
     public Float getTotalProfit()
     {
-        return totalProfit;
+        return Float.parseFloat(df.format(totalProfit));
+    }
+
+    public void calculateROI()
+    {
+        ROI = totalProfit / (bet1Stake + bet2Stake);
+        ROI = ROI * 100;
+    }
+
+    public Float getROI()
+    {
+        return Float.parseFloat(df.format(ROI));
     }
 }
